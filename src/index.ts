@@ -13,16 +13,7 @@ app.use(errorMiddleware);
 
 export const prismaClient = new PrismaClient({
   log: ['query'],
-}).$extends({
-  query: {
-    user: {
-      create({ args, query }) {
-        args.data = SignUpSchema.parse(args.data);
-        return query(args);
-      },
-    },
-  },
-});
+})
 
 app.listen(PORT, () => {
   console.log('Server is running');
