@@ -13,7 +13,7 @@ export const signup = async (
   res: Response,
   next: NextFunction
 ) => {
-  try {
+
     SignUpSchema.parse(req.body);
     const { email, password, name } = req.body;
 
@@ -34,15 +34,6 @@ export const signup = async (
       },
     });
     res.json(user);
-  } catch (err: any) {
-    next(
-      new UnprocessableEntity(
-        err?.issues,
-        'Unprocessable Entity',
-        ErrorCode.UNPROCESSABLE_ENTITY
-      )
-    );
-  }
 };
 
 export const login = async (req: Request, res: Response) => {
