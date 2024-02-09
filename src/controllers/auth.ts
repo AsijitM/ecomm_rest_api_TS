@@ -34,7 +34,11 @@ export const signup = async (
   res.json(user);
 };
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { email, password } = req.body;
 
   let user = await prismaClient.user.findFirst({ where: { email } });
@@ -54,4 +58,9 @@ export const login = async (req: Request, res: Response) => {
     JWT_SECRET
   );
   res.json({ user, token });
+};
+
+// /me -> return logged in user
+export const me = async (req: Request, res: Response) => {
+  res.json(req.user);
 };
